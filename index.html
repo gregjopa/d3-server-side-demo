@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>D3 Server-side Demo</title>
+
+    <style>
+      body {
+        background-color: #f5f5f5;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 12px;
+      }
+
+      .svg-chart .background {
+        shape-rendering: crispEdges;
+        stroke: #ccc;
+        fill: #fdfdfd;
+        stroke-width: 1px;
+      }
+
+      .svg-chart .bar { fill: #4682B4; }
+    </style>
+
+  </head>
+  <body>
+    <h1>D3 Server-side Demo</h1>
+    <%-
+      barChartHelper.getBarChart({
+        data: fixtureData,
+        width: 400,
+        height: 300,
+        xAxisLabel: '2012',
+        yAxisLabel: 'Views',
+        containerId: 'bar-chart-small'
+      })
+    %>
+    <hr>
+    <%-
+      barChartHelper.getBarChart({
+        data: fixtureData,
+        width: 800,
+        height: 600,
+        xAxisLabel: '2012',
+        yAxisLabel: 'Views',
+        containerId: 'bar-chart-large'
+      })
+    %>
+  </body>
+</html>
