@@ -1,3 +1,5 @@
+var d3 = require('d3');
+
 var barChart = module.exports = function() {
 
   var data = [];

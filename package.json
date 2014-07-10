@@ -1,13 +1,19 @@
 {
   "name": "d3-server-side-demo",
   "description": "uses d3.js to render svg charts on the server-side",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "main": "app.js",
+  "engines": {
+    "node": "0.10.29"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
-    "express": "~3.4.4",
-    "ejs": "~0.8.5",
-    "d3": "~3.3.10"
+    "express": "~4.5.1",
+    "ejs": "~1.0.0",
+    "d3": "~3.4.9"
   },
   "repository": {
     "type": "git",
