@@ -14,5 +14,5 @@ This demo app uses d3.js to render svg charts on the server-side with node.js.
 
 * Clone the repo
 * Install dependencies with `npm install`
-* Run development server with `node app` and go here:
+* Run development server with `npm start` and go here:
 [http://localhost:3000/](http://localhost:3000/)
