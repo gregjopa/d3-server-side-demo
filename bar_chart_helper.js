@@ -1,13 +1,13 @@
-var d3 = require('d3');
-const jsdom = require("jsdom")
-const { JSDOM } = jsdom
-const doc = new JSDOM(`<!DOCTYPE html><body></body>`).window.document
-var barChart = require('./bar_chart');
+const d3 = require('d3');
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const doc = new JSDOM(`<!DOCTYPE html><body></body>`).window.document;
+const barChart = require('./bar_chart');
 
 
-var getBarChart = function (params) {
+const getBarChart = function (params) {
 
-  var chart = barChart()
+  const chart = barChart()
     .data(params.data)
     .width(params.width)
     .height(params.height)
@@ -17,8 +17,8 @@ var getBarChart = function (params) {
 
   d3.select(doc.body).append('div').attr('id', params.containerId).call(chart);
 
-  var selector = params.containerId;
-  var svg = d3.select(doc.getElementById(selector)).node().outerHTML;
+  const selector = params.containerId;
+  const svg = d3.select(doc.getElementById(selector)).node().outerHTML;
   d3.select(doc.getElementById(selector)).remove();
 
   return svg;

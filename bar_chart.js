@@ -1,10 +1,10 @@
-var d3 = require('d3');
+const d3 = require('d3');
 
-var barChart = module.exports = function() {
+module.exports = function() {
 
-  var data = [];
+  let data = [];
 
-  // var data = [
+  // const data = [
   //   {
   //     'name': '20130601',
   //     'count': 26
@@ -17,21 +17,22 @@ var barChart = module.exports = function() {
 
 
   // default values for configurable input parameters
-  var width = 400;
-  var height = 300;
-  var margin = {
+  let width = 400;
+  let height = 300;
+  let margin = {
     top: 10,
     right: 10,
     bottom: 40,
     left: 40
   };
-  var xAxisLabel = 'Categories';
-  var yAxisLabel = 'Count';
+  let xAxisLabel = 'Categories';
+  let yAxisLabel = 'Count';
 
 
-  var chart = function(container) {
+  const chart = function(container) {
 
-    setDimensions();
+    const axisLabelMargin = 10;
+
     setupXAxis();
     setupYAxis();
     setupBarChartLayout();
@@ -41,28 +42,16 @@ var barChart = module.exports = function() {
     addBarChartData();
 
 
-
-
-    var axisLabelMargin;
-
-    function setDimensions() {
-
-      axisLabelMargin = 10;
-
-    }
-
-
-
-
     var xScale, xAxis, xAxisCssClass;
 
     function setupXAxis() {
 
-      xScale = d3.scale.ordinal()
+      xScale = d3.scaleBand()
         .domain(data.map(function(d) {
           return d.name;
         }))
-        .rangeRoundBands([0, width - axisLabelMargin - margin.left - margin.right], 0.25);
+        .rangeRound([0, width - axisLabelMargin - margin.left - margin.right])
+        .padding(0.25);
 
       if (data.length > 12 && width < 500) {
         xAxisCssClass = 'axis-font-small';
@@ -70,38 +59,30 @@ var barChart = module.exports = function() {
         xAxisCssClass = '';
       }
 
-      xAxis = d3.svg.axis()
+      xAxis = d3.axisBottom()
         .scale(xScale)
-        .innerTickSize(0)
-        .outerTickSize(0)
-        .orient('bottom');
+        .tickSizeInner(0)
+        .tickSizeOuter(0);
 
     }
-
-
 
 
     var yScale, yAxis;
 
     function setupYAxis() {
 
-      yScale = d3.scale.linear()
+      yScale = d3.scaleLinear()
         .domain([0, d3.max(data, function(d) {
           return d.count;
         })])
         .range([height - axisLabelMargin - margin.top - margin.bottom, 0]);
 
-      yAxis = d3.svg.axis()
+      yAxis = d3.axisLeft()
         .ticks(5)
-        .tickFormat(d3.format('s'))
-        .innerTickSize(-width + axisLabelMargin + margin.left + margin.right)
-        .outerTickSize(0)
-        .scale(yScale)
-        .orient('left');
+        .tickSizeOuter(0)
+        .scale(yScale);
 
     }
-
-
 
 
     var g;
@@ -116,8 +97,6 @@ var barChart = module.exports = function() {
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     }
-
-
 
 
     function addXAxisLabel() {
@@ -137,8 +116,6 @@ var barChart = module.exports = function() {
     }
 
 
-
-
     function addYAxisLabel() {
 
       g.append('g')
@@ -156,8 +133,6 @@ var barChart = module.exports = function() {
     }
 
 
-
-
     function addBackground() {
 
       g.append('rect')
@@ -170,13 +145,9 @@ var barChart = module.exports = function() {
     }
 
 
-
-
-    var bar;
-
     function addBarChartData() {
 
-      bar = g.selectAll('.bar')
+      g.selectAll('.bar')
         .data(data)
         .enter().append('rect')
         .attr('class', 'bar')
@@ -186,7 +157,7 @@ var barChart = module.exports = function() {
         .attr('y', function(d) {
           return yScale(d.count);
         })
-        .attr('width', xScale.rangeBand())
+        .attr('width', xScale.bandwidth())
         .attr('height', function(d) {
           return height - margin.top - margin.bottom - yScale(d.count) - axisLabelMargin;
         });
@@ -196,8 +167,6 @@ var barChart = module.exports = function() {
 
 
   };
-
-
 
 
   chart.data = function(value) {
