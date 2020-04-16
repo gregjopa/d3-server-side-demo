@@ -31,7 +31,8 @@ module.exports = function() {
 
   const chart = function(container) {
 
-    setDimensions();
+    const axisLabelMargin = 10;
+
     setupXAxis();
     setupYAxis();
     setupBarChartLayout();
@@ -41,24 +42,16 @@ module.exports = function() {
     addBarChartData();
 
 
-    var axisLabelMargin;
-
-    function setDimensions() {
-
-      axisLabelMargin = 10;
-
-    }
-
-
     var xScale, xAxis, xAxisCssClass;
 
     function setupXAxis() {
 
-      xScale = d3.scale.ordinal()
+      xScale = d3.scaleBand()
         .domain(data.map(function(d) {
           return d.name;
         }))
-        .rangeRoundBands([0, width - axisLabelMargin - margin.left - margin.right], 0.25);
+        .rangeRound([0, width - axisLabelMargin - margin.left - margin.right])
+        .padding(0.25);
 
       if (data.length > 12 && width < 500) {
         xAxisCssClass = 'axis-font-small';
@@ -66,11 +59,10 @@ module.exports = function() {
         xAxisCssClass = '';
       }
 
-      xAxis = d3.svg.axis()
+      xAxis = d3.axisBottom()
         .scale(xScale)
-        .innerTickSize(0)
-        .outerTickSize(0)
-        .orient('bottom');
+        .tickSizeInner(0)
+        .tickSizeOuter(0);
 
     }
 
@@ -79,19 +71,16 @@ module.exports = function() {
 
     function setupYAxis() {
 
-      yScale = d3.scale.linear()
+      yScale = d3.scaleLinear()
         .domain([0, d3.max(data, function(d) {
           return d.count;
         })])
         .range([height - axisLabelMargin - margin.top - margin.bottom, 0]);
 
-      yAxis = d3.svg.axis()
+      yAxis = d3.axisLeft()
         .ticks(5)
-        .tickFormat(d3.format('s'))
-        .innerTickSize(-width + axisLabelMargin + margin.left + margin.right)
-        .outerTickSize(0)
-        .scale(yScale)
-        .orient('left');
+        .tickSizeOuter(0)
+        .scale(yScale);
 
     }
 
@@ -168,7 +157,7 @@ module.exports = function() {
         .attr('y', function(d) {
           return yScale(d.count);
         })
-        .attr('width', xScale.rangeBand())
+        .attr('width', xScale.bandwidth())
         .attr('height', function(d) {
           return height - margin.top - margin.bottom - yScale(d.count) - axisLabelMargin;
         });
