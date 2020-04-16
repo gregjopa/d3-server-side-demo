@@ -8,7 +8,8 @@
     "node": ">=12"
   },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "lint": "eslint . --fix"
   },
   "dependencies": {
     "d3": "^5.15.1",
@@ -21,6 +22,7 @@
     "url": "https://github.com/gregjopa/d3-server-side-demo"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
     "nodemon": "^2.0.3"
   }
 }

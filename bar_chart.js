@@ -1,10 +1,10 @@
-var d3 = require('d3');
+const d3 = require('d3');
 
-var barChart = module.exports = function() {
+module.exports = function() {
 
-  var data = [];
+  let data = [];
 
-  // var data = [
+  // const data = [
   //   {
   //     'name': '20130601',
   //     'count': 26
@@ -17,19 +17,19 @@ var barChart = module.exports = function() {
 
 
   // default values for configurable input parameters
-  var width = 400;
-  var height = 300;
-  var margin = {
+  let width = 400;
+  let height = 300;
+  let margin = {
     top: 10,
     right: 10,
     bottom: 40,
     left: 40
   };
-  var xAxisLabel = 'Categories';
-  var yAxisLabel = 'Count';
+  let xAxisLabel = 'Categories';
+  let yAxisLabel = 'Count';
 
 
-  var chart = function(container) {
+  const chart = function(container) {
 
     setDimensions();
     setupXAxis();
@@ -41,8 +41,6 @@ var barChart = module.exports = function() {
     addBarChartData();
 
 
-
-
     var axisLabelMargin;
 
     function setDimensions() {
@@ -50,8 +48,6 @@ var barChart = module.exports = function() {
       axisLabelMargin = 10;
 
     }
-
-
 
 
     var xScale, xAxis, xAxisCssClass;
@@ -79,8 +75,6 @@ var barChart = module.exports = function() {
     }
 
 
-
-
     var yScale, yAxis;
 
     function setupYAxis() {
@@ -102,8 +96,6 @@ var barChart = module.exports = function() {
     }
 
 
-
-
     var g;
 
     function setupBarChartLayout() {
@@ -116,8 +108,6 @@ var barChart = module.exports = function() {
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     }
-
-
 
 
     function addXAxisLabel() {
@@ -137,8 +127,6 @@ var barChart = module.exports = function() {
     }
 
 
-
-
     function addYAxisLabel() {
 
       g.append('g')
@@ -156,8 +144,6 @@ var barChart = module.exports = function() {
     }
 
 
-
-
     function addBackground() {
 
       g.append('rect')
@@ -170,13 +156,9 @@ var barChart = module.exports = function() {
     }
 
 
-
-
-    var bar;
-
     function addBarChartData() {
 
-      bar = g.selectAll('.bar')
+      g.selectAll('.bar')
         .data(data)
         .enter().append('rect')
         .attr('class', 'bar')
@@ -196,8 +178,6 @@ var barChart = module.exports = function() {
 
 
   };
-
-
 
 
   chart.data = function(value) {
