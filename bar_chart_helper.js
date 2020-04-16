@@ -1,7 +1,7 @@
 var d3 = require('d3');
 const jsdom = require("jsdom")
 const { JSDOM } = jsdom
-doc = new JSDOM(`<!DOCTYPE html><body></body>`).window.document
+const doc = new JSDOM(`<!DOCTYPE html><body></body>`).window.document
 var barChart = require('./bar_chart');
 
 
