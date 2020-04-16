@@ -1,6 +1,6 @@
 var d3 = require('d3');
 var jsdom = require('jsdom');
-var doc = jsdom.jsdom();
+var doc = jsdom.jsdom;
 var barChart = require('./bar_chart');
 
 
