@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "nodemon app.js",
+    "test": "node bar_chart_helper_test.js",
     "lint": "eslint . --fix"
   },
   "dependencies": {
