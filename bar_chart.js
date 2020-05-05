@@ -17,8 +17,8 @@ class BarChart {
     this.margin = {
       top: 10,
       right: 10,
-      bottom: 40,
-      left: 40
+      bottom: 34,
+      left: 34
     };
   }
 

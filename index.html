@@ -3,13 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>D3 Server-side Demo</title>
+    <title>D3.js Server-side Demo</title>
 
     <style>
       body {
         background-color: #f5f5f5;
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         font-size: 12px;
+      }
+
+      .svg-chart {
+        padding: 4px;
+        border: 1px solid #ccc;
       }
 
       .svg-chart .background {
@@ -20,11 +25,12 @@
       }
 
       .svg-chart .bar { fill: #4682B4; }
+      .svg-chart .axis-label { fill: currentColor; }
     </style>
 
   </head>
   <body>
-    <h1>D3 Server-side Demo</h1>
+    <h1>D3.js Server-side Demo</h1>
     <%-
       barChartHelper.getBarChart({
         data: fixtureData,
@@ -35,7 +41,7 @@
         containerId: 'bar-chart-small'
       })
     %>
-    <hr>
+    <br>
     <%-
       barChartHelper.getBarChart({
         data: fixtureData,
