@@ -1,56 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>D3.js Server-side Demo</title>
 
-    <style>
-      body {
-        background-color: #f5f5f5;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 12px;
-      }
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script type="text/javascript" src="https://cdn.bootcss.com/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+  <script type="text/javascript" src="https://cdn.bootcss.com/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+  <title>D3.js Server-side Demo</title>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 12px;
+    }
 
-      .svg-chart {
-        padding: 4px;
-        border: 1px solid #ccc;
-      }
+    .svg-chart {
+      padding: 4px;
+      border: 1px solid #ccc;
+    }
 
-      .svg-chart .background {
-        shape-rendering: crispEdges;
-        stroke: #ccc;
-        fill: #fdfdfd;
-        stroke-width: 1px;
-      }
+    .svg-chart .background {
+      shape-rendering: crispEdges;
+      stroke: #ccc;
+      fill: #fdfdfd;
+      stroke-width: 1px;
+    }
 
-      .svg-chart .bar { fill: #4682B4; }
-      .svg-chart .axis-label { fill: currentColor; }
-    </style>
+    .svg-chart .bar {
+      fill: #4682B4;
+    }
 
-  </head>
-  <body>
-    <h1>D3.js Server-side Demo</h1>
-    <%-
-      barChartHelper.getBarChart({
-        data: fixtureData,
-        width: 400,
-        height: 300,
-        xAxisLabel: '2012',
-        yAxisLabel: 'Views',
-        containerId: 'bar-chart-small'
-      })
-    %>
+    .svg-chart .axis-label {
+      fill: currentColor;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>D3.js Server-side Demo</h1>
+  <%- barChartHelper.getBarChart({ data: fixtureData, width: 400, height: 300, xAxisLabel: '2012' , yAxisLabel: 'Views'
+    , containerId: 'bar-chart-small' }) %>
     <br>
-    <%-
-      barChartHelper.getBarChart({
-        data: fixtureData,
-        width: 800,
-        height: 600,
-        xAxisLabel: '2012',
-        yAxisLabel: 'Views',
-        containerId: 'bar-chart-large'
-      })
-    %>
-  </body>
+    <%- barChartHelper.getBarChart({ data: fixtureData, width: 800, height: 600, xAxisLabel: '2012' ,
+      yAxisLabel: 'Views' , containerId: 'bar-chart-large' }) %>
+      <button id="foo">Download image</button>
+      <script type="text/javascript">
+        var node = document.getElementById('bar-chart-large');
+        var btn = document.getElementById('foo');
+
+        btn.onclick = function () {
+          domtoimage.toBlob(document.getElementById('bar-chart-large'))
+            .then(function (blob) {
+              window.saveAs(blob, 'bar-chart-large.png');
+            });
+        }
+      </script>
+</body>
+
 </html>
