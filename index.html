@@ -47,9 +47,10 @@
       var btn = document.getElementById('foo');
 
       btn.onclick = function () {
-        domtoimage.toBlob(document.getElementById('bar-chart-large'))
+        // domtoimage.toBlob(document.getElementById('bar-chart-large'))
+        domtoimage.toBlob(document.getElementById('tunes-userviz'))
           .then(function (blob) {
-            window.saveAs(blob, 'bar-chart-large.png');
+            window.saveAs(blob, 'tunes-userviz.png');
           });
       }
     </script>
