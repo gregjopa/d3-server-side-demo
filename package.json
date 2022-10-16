@@ -16,7 +16,10 @@
     "d3": "^5.16.0",
     "ejs": "^3.1.2",
     "express": "^4.17.1",
-    "jsdom": "^16.2.2"
+    "handlebars": "^4.7.7",
+    "jquery": "^3.6.1",
+    "jsdom": "^16.2.2",
+    "modernizr": "^3.12.0"
   },
   "repository": {
     "type": "git",
