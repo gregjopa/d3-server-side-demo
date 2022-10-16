@@ -38,23 +38,21 @@
 
 <body>
   <h1>D3.js Server-side Demo</h1>
-  <%- barChartHelper.getBarChart({ data: fixtureData, width: 400, height: 300, xAxisLabel: '2012' , yAxisLabel: 'Views'
-    , containerId: 'bar-chart-small' }) %>
-    <br>
-    <%- barChartHelper.getBarChart({ data: fixtureData, width: 800, height: 600, xAxisLabel: '2012' ,
-      yAxisLabel: 'Views' , containerId: 'bar-chart-large' }) %>
-      <button id="foo">Download image</button>
-      <script type="text/javascript">
-        var node = document.getElementById('bar-chart-large');
-        var btn = document.getElementById('foo');
+  <br>
+  <%- barChartHelper.getBarChart({ data: fixtureData, width: 800, height: 600, xAxisLabel: '2012' , yAxisLabel: 'Views'
+    , containerId: 'bar-chart-large' }) %>
+    <button id="foo">Download image</button>
+    <script type="text/javascript">
+      var node = document.getElementById('bar-chart-large');
+      var btn = document.getElementById('foo');
 
-        btn.onclick = function () {
-          domtoimage.toBlob(document.getElementById('bar-chart-large'))
-            .then(function (blob) {
-              window.saveAs(blob, 'bar-chart-large.png');
-            });
-        }
-      </script>
+      btn.onclick = function () {
+        domtoimage.toBlob(document.getElementById('bar-chart-large'))
+          .then(function (blob) {
+            window.saveAs(blob, 'bar-chart-large.png');
+          });
+      }
+    </script>
 </body>
 
 </html>
